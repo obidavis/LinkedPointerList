@@ -85,6 +85,20 @@ public:
 	 */
 	virtual void clear();
 
+	class iterator {
+	public:
+		iterator(PointerListNode<T>* node) : _node(node) { }
+		T* operator*() { return _node->data; }
+		iterator& operator++() { _node = _node->next; return *this; }
+		bool operator!=(const iterator& other) { return _node != other._node; }
+	private:
+		PointerListNode<T>* _node;
+	};
+
+	iterator begin() { return iterator(root); }
+	iterator end() { return iterator(NULL); }
+	
+
 };
 
 // ------------ Template Implementation ------------
